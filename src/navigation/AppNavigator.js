@@ -1,27 +1,28 @@
-import React from "react";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { NavigationContainer } from "@react-navigation/native";
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Ionicons } from '@expo/vector-icons';
 
-import HomeScreen from "../screens/HomeScreen";
-import LoginScreen from "../screens/LoginScreen";
-import RegisterScreen from "../screens/RegisterScreen";
-import ProfileScreen from "../screens/ProfileScreen";
-import UploadScreen from "../screens/UploadScreen";
-import LiveScreen from "../screens/LiveScreen";
+import FeedScreen from '../screens/FeedScreen';
+import UploadScreen from '../screens/UploadScreen';
+import ProfileScreen from '../screens/ProfileScreen';
 
-const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
 
 export default function AppNavigator() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Login" component={LoginScreen} />
-        <Stack.Screen name="Register" component={RegisterScreen} />
-        <Stack.Screen name="Profile" component={ProfileScreen} />
-        <Stack.Screen name="Upload" component={UploadScreen} />
-        <Stack.Screen name="Live" component={LiveScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Tab.Navigator screenOptions={{
+      tabBarStyle: { backgroundColor: "#000", borderTopColor: "#222" },
+      tabBarActiveTintColor: "#1e90ff",
+      tabBarInactiveTintColor: "#777"
+    }}>
+      <Tab.Screen name="Home" component={FeedScreen} options={{
+        tabBarIcon: ({ color }) => <Ionicons name="home" size={24} color={color} />
+      }} />
+      <Tab.Screen name="Upload" component={UploadScreen} options={{
+        tabBarIcon: ({ color }) => <Ionicons name="cloud-upload" size={24} color={color} />
+      }} />
+      <Tab.Screen name="Profile" component={ProfileScreen} options={{
+        tabBarIcon: ({ color }) => <Ionicons name="person" size={24} color={color} />
+      }} />
+    </Tab.Navigator>
   );
 }

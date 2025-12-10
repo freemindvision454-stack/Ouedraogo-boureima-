@@ -1,33 +1,24 @@
-import React from "react";
-import { View, Image, StyleSheet } from "react-native";
-import AppNavigator from "./src/navigation/AppNavigator";
-import APP_LOGO from "./assets/logo.png";
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+import SignupScreen from './src/screens/SignupScreen';
+import LoginScreen from './src/screens/LoginScreen';
+import FeedScreen from './src/screens/FeedScreen';
+import UploadScreen from './src/screens/UploadScreen';
+import ProfileScreen from './src/screens/ProfileScreen';
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <View style={{ flex: 1 }}>
-      <View style={styles.logoContainer}>
-        <Image source={APP_LOGO} style={styles.logo} />
-      </View>
-
-      <View style={{ flex: 1 }}>
-        <AppNavigator />
-      </View>
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="Signup" component={SignupScreen} />
+        <Stack.Screen name="Login" component={LoginScreen} />
+        <Stack.Screen name="Feed" component={FeedScreen} />
+        <Stack.Screen name="Upload" component={UploadScreen} />
+        <Stack.Screen name="Profile" component={ProfileScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  logoContainer: {
-    width: "100%",
-    height: 80,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#000",
-  },
-  logo: {
-    width: 60,
-    height: 60,
-    borderRadius: 12,
-  },
-});
